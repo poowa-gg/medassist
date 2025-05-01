@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAssist Pro - Help Shape the Future of Healthcare</title>
+    <style>
+        :root {
+            --primary: #2b7a78;
+            --secondary: #3aafa9;
+            --light: #feffff;
+            --dark: #17252a;
+            --accent: #def2f1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--accent);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            border-radius: 8px 8px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        
+        .intro {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .question-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        label:hover {
+            background-color: var(--accent);
+        }
+        
+        input[type="text"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 100px;
+        }
+        
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .rating-option {
+            text-align: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .rating-option:hover {
+            background-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .rating-option.selected {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .emoji-rating {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background-color: var(--accent);
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--secondary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .thank-you {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .thank-you h2 {
+            color: var(--primary);
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .rating {
+                flex-wrap: wrap;
+            }
+            
+            .rating-option {
+                width: 45%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MedAssist Pro</h1>
+            <p>Help Shape the Future of Healthcare in Nigeria</p>
+        </header>
+        
+        <div class="intro">
+            <p>We're building an innovative healthcare platform to make quality medical support accessible to all Nigerians. Your input will help us create a solution that truly meets your needs.</p>
+            <p>This survey should take about 5-7 minutes to complete. Your responses are anonymous.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <form id="survey-form">
+            <!-- Section 1: Demographics -->
+            <div class="question-group" id="section1">
+                <h2>About You</h2>
+                
+                <div class="question">
+                    <div class="question-text">1. Which age group do you belong to?</div>
+                    <label><input type="radio" name="age" value="under18"> Under 18</label>
+                    <label><input type="radio" name="age" value="18-25"> 18-25</label>
+                    <label><input type="radio" name="age" value="26-35"> 26-35</label>
+                    <label><input type="radio" name="age" value="36-50"> 36-50</label>
+                    <label><input type="radio" name="age" value="over50"> Over 50</label>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">2. Where do you primarily live?</div>
+                    <label><input type="radio" name="location" value="urban"> Urban area (e.g., Lagos, Abuja, Port Harcourt)</label>
+                    <label><input type="radio" name="location" value="semi-urban"> Semi-urban area</label>
+                    <label><input type="radio" name="location" value="rural"> Rural area</label>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">3. How often do you access healthcare services?</div>
+                    <label><input type="radio" name="healthcare_frequency" value="monthly"> Monthly or more</label>
+                    <label><input type="radio" name="healthcare_frequency" value="quarterly"> Every few months</label>
+                    <label><input type="radio" name="healthcare_frequency" value="yearly"> Once a year or less</label>
+                    <label><input type="radio" name="healthcare_frequency" value="rarely"> Only when absolutely necessary</label>
+                </div>
+            </div>
+            
+            <!-- Section 2: Current Healthcare Experience -->
+            <div class="question-group hidden" id="section2">
+                <h2>Your Healthcare Experience</h2>
+                
+                <div class="question">
+                    <div class="question-text">4. What are your biggest challenges with healthcare access? (Select all that apply)</div>
+                    <label><input type="checkbox" name="challenges" value="cost"> High cost of services</label>
+                    <label><input type="checkbox" name="challenges" value="distance"> Long distance to facilities</label>
+                    <label><input type="checkbox" name="challenges" value="waiting"> Long waiting times</label>
+                    <label><input type="checkbox" name="challenges" value="quality"> Concerns about quality of care</label>
+                    <label><input type="checkbox" name="challenges" value="information"> Lack of health information</label>
+                    <label><input type="checkbox" name="challenges" value="other"> Other (please specify)</label>
+                    <input type="text" name="challenges_other" placeholder="Please specify" class="hidden" id="challenges-other">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">5. How do you currently handle minor health concerns?</div>
+                    <label><input type="radio" name="minor_health" value="self"> Self-medication/Home remedies</label>
+                    <label><input type="radio" name="minor_health" value="pharmacy"> Visit a pharmacy</label>
+                    <label><input type="radio" name="minor_health" value="hospital"> Go to hospital/clinic</label>
+                    <label><input type="radio" name="minor_health" value="ignore"> Ignore unless it gets worse</label>
+                    <label><input type="radio" name="minor_health" value="other"> Other (please specify)</label>
+                    <input type="text" name="minor_health_other" placeholder="Please specify" class="hidden" id="minor-health-other">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">6. Have you ever used any digital health service (telemedicine, health apps, etc.)?</div>
+                    <label><input type="radio" name="digital_health" value="yes_regular"> Yes, regularly</label>
+                    <label><input type="radio" name="digital_health" value="yes_rarely"> Yes, but rarely</label>
+                    <label><input type="radio" name="digital_health" value="no_but_interested"> No, but interested</label>
+                    <label><input type="radio" name="digital_health" value="no_not_interested"> No, not interested</label>
+                </div>
+            </div>
+            
+            <!-- Section 3: MedAssist Pro Features -->
+            <div class="question-group hidden" id="section3">
+                <h2>Exploring MedAssist Pro Features</h2>
+                <p>We're developing a platform with these key features:</p>
+                
+                <div class="question">
+                    <div class="question-text">7. <span class="feature-icon">💬</span> AI Symptom Checker: How likely would you be to use a chatbot that helps assess symptoms and suggest possible conditions?</div>
+                    <div class="rating">
+                        <div class="rating-option" data-value="5">
+                            <div class="emoji-rating">😍</div>
+                            Very likely
+                        </div>
+                        <div class="rating-option" data-value="4">
+                            <div class="emoji-rating">🙂</div>
+                            Likely
+                        </div>
+                        <div class="rating-option" data-value="3">
+                            <div class="emoji-rating">😐</div>
+                            Neutral
+                        </div>
+                        <div class="rating-option" data-value="2">
+                            <div class="emoji-rating">🙁</div>
+                            Unlikely
+                        </div>
+                        <div class="rating-option" data-value="1">
+                            <div class="emoji-rating">😞</div>
+                            Very unlikely
+                        </div>
+                    </div>
+                    <input type="hidden" name="symptom_checker_rating" id="symptom-checker-rating">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">8. <span class="feature-icon">👨‍⚕️</span> Doctor Consultations: How important is the ability to book video/audio consultations with doctors through an app?</div>
+                    <div class="rating">
+                        <div class="rating-option" data-value="5">
+                            <div class="emoji-rating">😍</div>
+                            Extremely important
+                        </div>
+                        <div class="rating-option" data-value="4">
+                            <div class="emoji-rating">🙂</div>
+                            Very important
+                        </div>
+                        <div class="rating-option" data-value="3">
+                            <div class="emoji-rating">😐</div>
+                            Somewhat important
+                        </div>
+                        <div class="rating-option" data-value="2">
+                            <div class="emoji-rating">🙁</div>
+                            Slightly important
+                        </div>
+                        <div class="rating-option" data-value="1">
+                            <div class="emoji-rating">😞</div>
+                            Not important
+                        </div>
+                    </div>
+                    <input type="hidden" name="consultation_rating" id="consultation-rating">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">9. <span class="feature-icon">🚨</span> Emergency Response: How valuable would a one-tap emergency service with ambulance dispatch be for you?</div>
+                    <div class="rating">
+                        <div class="rating-option" data-value="5">
+                            <div class="emoji-rating">😍</div>
+                            Extremely valuable
+                        </div>
+                        <div class="rating-option" data-value="4">
+                            <div class="emoji-rating">🙂</div>
+                            Very valuable
+                        </div>
+                        <div class="rating-option" data-value="3">
+                            <div class="emoji-rating">😐</div>
+                            Somewhat valuable
+                        </div>
+                        <div class="rating-option" data-value="2">
+                            <div class="emoji-rating">🙁</div>
+                            Slightly valuable
+                        </div>
+                        <div class="rating-option" data-value="1">
+                            <div class="emoji-rating">😞</div>
+                            Not valuable
+                        </div>
+                    </div>
+                    <input type="hidden" name="emergency_rating" id="emergency-rating">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">10. Which subscription model would you prefer? (Select one)</div>
+                    <label><input type="radio" name="subscription" value="free"> Free Plan: Basic features with pay-per-use consultations</label>
+                    <label><input type="radio" name="subscription" value="basic"> Basic Plan: Small monthly fee for unlimited chatbot + few consultations</label>
+                    <label><input type="radio" name="subscription" value="premium"> Premium Plan: Higher monthly fee for all features + priority access</label>
+                    <label><input type="radio" name="subscription" value="none"> I wouldn't pay for such a service</label>
+                </div>
+            </div>
+            
+            <!-- Section 4: Final Thoughts -->
+            <div class="question-group hidden" id="section4">
+                <h2>Final Thoughts</h2>
+                
+                <div class="question">
+                    <div class="question-text">11. What additional features would make this app more valuable to you?</div>
+                    <textarea name="additional_features" placeholder="E.g., medication reminders, health records storage, etc."></textarea>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">12. What concerns would you have about using such an app?</div>
+                    <textarea name="concerns" placeholder="E.g., privacy, accuracy, cost, etc."></textarea>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">13. Would you like to be notified when MedAssist Pro launches?</div>
+                    <label><input type="radio" name="notify" value="yes"> Yes, please notify me</label>
+                    <label><input type="radio" name="notify" value="no"> No, thanks</label>
+                    <div id="email-field" class="hidden">
+                        <input type="email" name="email" placeholder="Your email address">
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" id="next-btn">Next</button>
+        </form>
+        
+        <div class="thank-you hidden" id="thank-you">
+            <h2>Thank You!</h2>
+            <p>Your feedback is invaluable in helping us create a healthcare solution that truly serves the needs of Nigerians.</p>
+            <p>Together, we can make quality healthcare accessible to all.</p>
+            <div style="font-size: 3em; margin-top: 20px;">❤️</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = ['section1', 'section2', 'section3', 'section4'];
+            let currentSection = 0;
+            const nextBtn = document.getElementById('next-btn');
+            const form = document.getElementById('survey-form');
+            const progressBar = document.getElementById('progress');
+            const thankYou = document.getElementById('thank-you');
+            
+            // Show first section
+            document.getElementById(sections[currentSection]).classList.remove('hidden');
+            updateProgress();
+            
+            // Rating selection
+            document.querySelectorAll('.rating-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from siblings
+                    this.parentNode.querySelectorAll('.rating-option').forEach(sib => {
+                        sib.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update corresponding hidden input
+                    const inputId = this.parentNode.parentNode.querySelector('input[type="hidden"]').id;
+                    document.getElementById(inputId).value = this.dataset.value;
+                });
+            });
+            
+            // Show "other" text fields when selected
+            document.querySelector('input[name="challenges"][value="other"]').addEventListener('change', function() {
+                document.getElementById('challenges-other').classList.toggle('hidden', !this.checked);
+            });
+            
+            document.querySelector('input[name="minor_health"][value="other"]').addEventListener('change', function() {
+                document.getElementById('minor-health-other').classList.toggle('hidden', !this.checked);
+            });
+            
+            document.querySelector('input[name="notify"][value="yes"]').addEventListener('change', function() {
+                document.getElementById('email-field').classList.toggle('hidden', !this.checked);
+            });
+            
+            // Next button click handler
+            nextBtn.addEventListener('click', function() {
+                // Validate current section
+                if (!validateSection(sections[currentSection])) {
+                    return;
+                }
+                
+                // Hide current section
+                document.getElementById(sections[currentSection]).classList.add('hidden');
+                
+                // Move to next section or submit
+                currentSection++;
+                
+                if (currentSection < sections.length) {
+                    // Show next section
+                    document.getElementById(sections[currentSection]).classList.remove('hidden');
+                    
+                    // Update button text if last section
+                    if (currentSection === sections.length - 1) {
+                        nextBtn.textContent = 'Submit';
+                    }
+                    
+                    updateProgress();
+                } else {
+                    // Submit form
+                    form.style.display = 'none';
+                    thankYou.classList.remove('hidden');
+                    progressBar.style.display = 'none';
+                    
+                    // In a real app, you would send the data to a server here
+                    console.log('Form submitted!', collectFormData());
+                }
+            });
+            
+            function validateSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                let isValid = true;
+                
+                // Check required radio buttons
+                const requiredRadios = section.querySelectorAll('input[type="radio"][required]');
+                requiredRadios.forEach(group => {
+                    const name = group.name;
+                    const checked = section.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        isValid = false;
+                        highlightMissing(group);
+                    }
+                });
+                
+                // Check required checkboxes (at least one)
+                const requiredCheckboxes = section.querySelectorAll('input[type="checkbox"][required]');
+                if (requiredCheckboxes.length > 0) {
+                    const name = requiredCheckboxes[0].name;
+                    const checked = section.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        isValid = false;
+                        highlightMissing(requiredCheckboxes[0]);
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            function highlightMissing(element) {
+                // Simple visual feedback for missing required fields
+                const question = element.closest('.question');
+                question.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    question.style.animation = '';
+                }, 500);
+            }
+            
+            function updateProgress() {
+                const progress = ((currentSection + 1) / sections.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            function collectFormData() {
+                const formData = {};
+                const inputs = form.querySelectorAll('input, textarea, select');
+                
+                inputs.forEach(input => {
+                    if (input.type === 'checkbox') {
+                        if (!formData[input.name]) {
+                            formData[input.name] = [];
+                        }
+                        if (input.checked) {
+                            formData[input.name].push(input.value);
+                        }
+                    } else if (input.type === 'radio') {
+                        if (input.checked) {
+                            formData[input.name] = input.value;
+                        }
+                    } else {
+                        formData[input.name] = input.value;
+                    }
+                });
+                
+                return formData;
+            }
+        });
+    </script>
+</body>
+</html>
