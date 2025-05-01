@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedAssist Pro - Help Shape the Future of Healthcare</title>
+    <title>MedAssist Pro - Healthcare Survey</title>
     <style>
         :root {
             --primary: #2b7a78;
@@ -224,7 +224,7 @@
                 
                 <div class="question">
                     <div class="question-text">1. Which age group do you belong to?</div>
-                    <label><input type="radio" name="age" value="under18"> Under 18</label>
+                    <label><input type="radio" name="age" value="under18" required> Under 18</label>
                     <label><input type="radio" name="age" value="18-25"> 18-25</label>
                     <label><input type="radio" name="age" value="26-35"> 26-35</label>
                     <label><input type="radio" name="age" value="36-50"> 36-50</label>
@@ -233,14 +233,14 @@
                 
                 <div class="question">
                     <div class="question-text">2. Where do you primarily live?</div>
-                    <label><input type="radio" name="location" value="urban"> Urban area (e.g., Lagos, Abuja, Port Harcourt)</label>
+                    <label><input type="radio" name="location" value="urban" required> Urban area (e.g., Lagos, Abuja, Port Harcourt)</label>
                     <label><input type="radio" name="location" value="semi-urban"> Semi-urban area</label>
                     <label><input type="radio" name="location" value="rural"> Rural area</label>
                 </div>
                 
                 <div class="question">
                     <div class="question-text">3. How often do you access healthcare services?</div>
-                    <label><input type="radio" name="healthcare_frequency" value="monthly"> Monthly or more</label>
+                    <label><input type="radio" name="healthcare_frequency" value="monthly" required> Monthly or more</label>
                     <label><input type="radio" name="healthcare_frequency" value="quarterly"> Every few months</label>
                     <label><input type="radio" name="healthcare_frequency" value="yearly"> Once a year or less</label>
                     <label><input type="radio" name="healthcare_frequency" value="rarely"> Only when absolutely necessary</label>
@@ -264,7 +264,7 @@
                 
                 <div class="question">
                     <div class="question-text">5. How do you currently handle minor health concerns?</div>
-                    <label><input type="radio" name="minor_health" value="self"> Self-medication/Home remedies</label>
+                    <label><input type="radio" name="minor_health" value="self" required> Self-medication/Home remedies</label>
                     <label><input type="radio" name="minor_health" value="pharmacy"> Visit a pharmacy</label>
                     <label><input type="radio" name="minor_health" value="hospital"> Go to hospital/clinic</label>
                     <label><input type="radio" name="minor_health" value="ignore"> Ignore unless it gets worse</label>
@@ -274,7 +274,7 @@
                 
                 <div class="question">
                     <div class="question-text">6. Have you ever used any digital health service (telemedicine, health apps, etc.)?</div>
-                    <label><input type="radio" name="digital_health" value="yes_regular"> Yes, regularly</label>
+                    <label><input type="radio" name="digital_health" value="yes_regular" required> Yes, regularly</label>
                     <label><input type="radio" name="digital_health" value="yes_rarely"> Yes, but rarely</label>
                     <label><input type="radio" name="digital_health" value="no_but_interested"> No, but interested</label>
                     <label><input type="radio" name="digital_health" value="no_not_interested"> No, not interested</label>
@@ -310,7 +310,7 @@
                             Very unlikely
                         </div>
                     </div>
-                    <input type="hidden" name="symptom_checker_rating" id="symptom-checker-rating">
+                    <input type="hidden" name="symptom_checker_rating" id="symptom-checker-rating" required>
                 </div>
                 
                 <div class="question">
@@ -337,7 +337,7 @@
                             Not important
                         </div>
                     </div>
-                    <input type="hidden" name="consultation_rating" id="consultation-rating">
+                    <input type="hidden" name="consultation_rating" id="consultation-rating" required>
                 </div>
                 
                 <div class="question">
@@ -364,12 +364,12 @@
                             Not valuable
                         </div>
                     </div>
-                    <input type="hidden" name="emergency_rating" id="emergency-rating">
+                    <input type="hidden" name="emergency_rating" id="emergency-rating" required>
                 </div>
                 
                 <div class="question">
                     <div class="question-text">10. Which subscription model would you prefer? (Select one)</div>
-                    <label><input type="radio" name="subscription" value="free"> Free Plan: Basic features with pay-per-use consultations</label>
+                    <label><input type="radio" name="subscription" value="free" required> Free Plan: Basic features with pay-per-use consultations</label>
                     <label><input type="radio" name="subscription" value="basic"> Basic Plan: Small monthly fee for unlimited chatbot + few consultations</label>
                     <label><input type="radio" name="subscription" value="premium"> Premium Plan: Higher monthly fee for all features + priority access</label>
                     <label><input type="radio" name="subscription" value="none"> I wouldn't pay for such a service</label>
@@ -392,7 +392,7 @@
                 
                 <div class="question">
                     <div class="question-text">13. Would you like to be notified when MedAssist Pro launches?</div>
-                    <label><input type="radio" name="notify" value="yes"> Yes, please notify me</label>
+                    <label><input type="radio" name="notify" value="yes" required> Yes, please notify me</label>
                     <label><input type="radio" name="notify" value="no"> No, thanks</label>
                     <div id="email-field" class="hidden">
                         <input type="email" name="email" placeholder="Your email address">
@@ -411,7 +411,27 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+
     <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyApZ6FIel0xsGENJ8m26M5CSdPAoLFd9yw",
+            authDomain: "medassist-survey.firebaseapp.com",
+            projectId: "medassist-survey",
+            storageBucket: "medassist-survey.firebasestorage.app",
+            messagingSenderId: "708277555406",
+            appId: "1:708277555406:web:51c1c68e7650b8cb72c09f"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
         document.addEventListener('DOMContentLoaded', function() {
             const sections = ['section1', 'section2', 'section3', 'section4'];
             let currentSection = 0;
@@ -478,13 +498,8 @@
                     
                     updateProgress();
                 } else {
-                    // Submit form
-                    form.style.display = 'none';
-                    thankYou.classList.remove('hidden');
-                    progressBar.style.display = 'none';
-                    
-                    // In a real app, you would send the data to a server here
-                    console.log('Form submitted!', collectFormData());
+                    // Submit form to Firebase
+                    submitToFirebase();
                 }
             });
             
@@ -494,12 +509,12 @@
                 
                 // Check required radio buttons
                 const requiredRadios = section.querySelectorAll('input[type="radio"][required]');
-                requiredRadios.forEach(group => {
-                    const name = group.name;
+                requiredRadios.forEach(radio => {
+                    const name = radio.name;
                     const checked = section.querySelector(`input[name="${name}"]:checked`);
                     if (!checked) {
                         isValid = false;
-                        highlightMissing(group);
+                        highlightMissing(radio);
                     }
                 });
                 
@@ -513,6 +528,15 @@
                         highlightMissing(requiredCheckboxes[0]);
                     }
                 }
+                
+                // Check required hidden inputs (for rating questions)
+                const requiredHidden = section.querySelectorAll('input[type="hidden"][required]');
+                requiredHidden.forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        highlightMissing(input);
+                    }
+                });
                 
                 return isValid;
             }
@@ -531,7 +555,7 @@
                 progressBar.style.width = `${progress}%`;
             }
             
-            function collectFormData() {
+            function submitToFirebase() {
                 const formData = {};
                 const inputs = form.querySelectorAll('input, textarea, select');
                 
@@ -547,12 +571,26 @@
                         if (input.checked) {
                             formData[input.name] = input.value;
                         }
-                    } else {
+                    } else if (input.name && input.value) {
                         formData[input.name] = input.value;
                     }
                 });
                 
-                return formData;
+                // Add timestamp
+                formData.timestamp = new Date().toISOString();
+                
+                // Save to Firestore
+                db.collection("survey_responses").add(formData)
+                    .then(() => {
+                        console.log("Document successfully written!");
+                        form.style.display = 'none';
+                        thankYou.classList.remove('hidden');
+                        progressBar.style.display = 'none';
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
+                        alert("There was an error submitting your response. Please try again.");
+                    });
             }
         });
     </script>
